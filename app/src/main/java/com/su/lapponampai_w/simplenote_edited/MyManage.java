@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.AvoidXfermode;
 import android.widget.Switch;
 
 import java.text.SimpleDateFormat;
@@ -17,6 +18,7 @@ public class MyManage {
 
     private MySQLiteOpenHelper mySQLiteOpenHelper;
     private SQLiteDatabase writeSQLiteDatabase,readSQLiteDatabase;
+
 
 
     //จะทำการ aad ข้อมูลเข้าไปใน ตาราง simplenoteTABLE
@@ -35,7 +37,6 @@ public class MyManage {
         mySQLiteOpenHelper = new MySQLiteOpenHelper(context);
         readSQLiteDatabase = mySQLiteOpenHelper.getReadableDatabase();
         writeSQLiteDatabase = mySQLiteOpenHelper.getWritableDatabase();
-
     }
 
     public long addValue(int intTable,

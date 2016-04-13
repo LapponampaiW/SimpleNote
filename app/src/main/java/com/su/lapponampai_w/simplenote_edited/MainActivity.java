@@ -15,9 +15,11 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     MyManage myManage;
-    Button button;
+    Button button,buttonDelete;
     EditText editText;
     TextView textView;
+
+    private static final String DATABASE_NAME = "SimpleNote.db";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,20 @@ public class MainActivity extends AppCompatActivity {
 
         //showNote ที่เก็บไว้
         showNote();
+
+
+
+        //deleteAllData ลบแต่ข้อมูลอย่างเดียวไม่ลบ Database
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteAllData();
+                showNote();
+                Toast t = Toast.makeText(MainActivity.this, "ลบข้อมูลสำเร็จ", Toast.LENGTH_LONG);
+                t.show();
+            }
+        });
+
 
 
        /* Cursor cursor = myManage.getAllNote();
@@ -55,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //ลบแต่ข้อมูลอย่างเดียวไม่ลบ Database ทำไมถึงทำในหน้านี้ได้แต่ทำใน MyManage ไม่ได้
+    //==> ต้องทำใน class แม่ (extends) AppCompatActivity เท่านั้น
+    private void deleteAllData() {
+        SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(DATABASE_NAME, MODE_APPEND, null);
+        sqLiteDatabase.delete("simplenoteTABLE", null, null);
+
+    }
+
     private void showNote() {
         Cursor cursor = myManage.getAllNote();
         StringBuilder sB =  myManage.showNote(cursor);
@@ -66,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.save_button);
         editText = (EditText) findViewById(R.id.new_text);
         textView = (TextView) findViewById(R.id.all_text);
+        buttonDelete = (Button) findViewById(R.id.button_Delete);
 
     }
 }
