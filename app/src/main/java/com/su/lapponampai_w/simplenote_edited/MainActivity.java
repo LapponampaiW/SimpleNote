@@ -1,6 +1,7 @@
 package com.su.lapponampai_w.simplenote_edited;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     MyManage myManage;
-    Button button,buttonDelete,buttonFilter;
+    Button button,buttonDelete,buttonFilter,buttonNext;
     EditText editText,editTextFilter;
     TextView textView;
 
@@ -34,6 +35,16 @@ public class MainActivity extends AppCompatActivity {
 
         //showNote ที่เก็บไว้
         showNote();
+
+
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToNextActivity();
+
+            }
+        });
+        
 
 
 
@@ -82,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void goToNextActivity() {
+        Intent intent = new Intent(MainActivity.this,OrderActivity.class);
+        startActivity(intent);
+    }
+
     //ทำ filter ได้สำเร็จ ==>> ดีใจมั่กๆ
     private void filternote() {
         Cursor cursor = myManage.filter(editTextFilter.getText().toString());
@@ -112,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         buttonDelete = (Button) findViewById(R.id.button_Delete);
         buttonFilter = (Button) findViewById(R.id.buttonFilter);
         editTextFilter = (EditText) findViewById(R.id.EditText_filter);
+        buttonNext = (Button) findViewById(R.id.buttonnext);
 
     }
 }

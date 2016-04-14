@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by apple on 4/12/16.
  */
+
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "SimpleNote.db";

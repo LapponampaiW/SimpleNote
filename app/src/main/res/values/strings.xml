@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SimpleNote_edited</string>
+    <string name="title_activity_my_list_view">MyListView</string>
 </resources>

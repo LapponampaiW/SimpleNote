@@ -93,5 +93,34 @@ public class MyManage {
         return builder;
     }
 
+    //ลอง code ดู
+    public String[] readallData(int intColumn) {
+        String[] strReadAll = null;
+        Cursor adaptorCursor = readSQLiteDatabase.query(table_main, columns, null, null, null, null, order_By);
+
+        if (adaptorCursor != null) {
+            adaptorCursor.moveToFirst();
+            strReadAll = new String[adaptorCursor.getCount()];
+            for (int i = 0; i < adaptorCursor.getCount(); i++) {
+                switch (intColumn) {
+                    case 0:
+                        strReadAll[i] = adaptorCursor.getString(adaptorCursor.getColumnIndex(column_id));
+                        break;
+                    case 1:
+                        strReadAll[i] = adaptorCursor.getString(adaptorCursor.getColumnIndex(column_Time));
+                        break;
+                    case 2:
+                        strReadAll[i] = adaptorCursor.getString(adaptorCursor.getColumnIndex(column_Content));
+                        break;
+                    default:
+                        break;
+                }
+                adaptorCursor.moveToNext();
+            }
+
+        }
+        return strReadAll;
+    }
+
 
 }
