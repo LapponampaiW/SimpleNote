@@ -15,8 +15,8 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     MyManage myManage;
-    Button button,buttonDelete;
-    EditText editText;
+    Button button,buttonDelete,buttonFilter;
+    EditText editText,editTextFilter;
     TextView textView;
 
     private static final String DATABASE_NAME = "SimpleNote.db";
@@ -49,6 +49,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        //สร้าง filter
+        buttonFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filternote();
+
+
+            }
+        });
+
+
 
        /* Cursor cursor = myManage.getAllNote();
        StringBuilder sB =  myManage.showNote(cursor);
@@ -71,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //ทำ filter ได้สำเร็จ ==>> ดีใจมั่กๆ
+    private void filternote() {
+        Cursor cursor = myManage.filter(editTextFilter.getText().toString());
+        StringBuilder sB = myManage.showNote(cursor);
+        textView.setText(sB);
+    }
+
+
     //ลบแต่ข้อมูลอย่างเดียวไม่ลบ Database ทำไมถึงทำในหน้านี้ได้แต่ทำใน MyManage ไม่ได้
     //==> ต้องทำใน class แม่ (extends) AppCompatActivity เท่านั้น
     private void deleteAllData() {
@@ -91,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.new_text);
         textView = (TextView) findViewById(R.id.all_text);
         buttonDelete = (Button) findViewById(R.id.button_Delete);
+        buttonFilter = (Button) findViewById(R.id.buttonFilter);
+        editTextFilter = (EditText) findViewById(R.id.EditText_filter);
 
     }
 }

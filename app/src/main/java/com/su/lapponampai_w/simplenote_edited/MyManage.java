@@ -65,6 +65,12 @@ public class MyManage {
         return cursor;
     }
 
+    //ทำการ filter ได้สำเร็จ
+    public Cursor filter(String i) {
+        Cursor cursor = readSQLiteDatabase.query(table_main, columns, "_id = " + i +";", null, null, null, order_By);
+        return cursor;
+    }
+
     public StringBuilder showNote(Cursor cursor) {
         StringBuilder builder = new StringBuilder("ข้อมูลที่บันทึกไว้    : \n \n \n");
 
